@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coke Studio Pakistan · A Tribute</title>
+  <meta name="description" content="An independent tribute to Coke Studio Pakistan, the sound of a nation since 2008. Explore the legacy, the anthems, and the videos that made history." />
+
+  <!-- ─── Social sharing (Open Graph + Twitter) ───────────────────────────
+       NOTE: replace the placeholder origin below with your deployed domain
+       so og:url / og:image resolve to absolute URLs crawlers can fetch. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Coke Studio Pakistan · A Tribute" />
+  <meta property="og:title" content="Coke Studio Pakistan · A Tribute" />
+  <meta property="og:description" content="The sound of a nation since 2008. Fifteen seasons, one stage, and the anthems that crossed a billion plays." />
+  <meta property="og:image" content="https://cokestudio-pakistan.example/assets/img/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Coke Studio Pakistan tribute: 1.01B views, 15 seasons, 17.8M subscribers" />
+  <meta property="og:url" content="https://cokestudio-pakistan.example/" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Coke Studio Pakistan · A Tribute" />
+  <meta name="twitter:description" content="The sound of a nation since 2008. Fifteen seasons, one stage, and the anthems that crossed a billion plays." />
+  <meta name="twitter:image" content="https://cokestudio-pakistan.example/assets/img/og-card.png" />
+  <meta name="twitter:image:alt" content="Coke Studio Pakistan tribute wordmark over studio key art" />
+  <meta name="theme-color" content="#08070a" />
+
+  <!-- ─── Structured data: the site + each anthem as a MusicRecording ───── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://cokestudio-pakistan.example/#website",
+        "name": "Coke Studio Pakistan · A Tribute",
+        "url": "https://cokestudio-pakistan.example/",
+        "description": "An independent, non-commercial tribute to Coke Studio Pakistan, the sound of a nation since 2008.",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "MusicRecording",
+        "name": "Pasoori",
+        "byArtist": { "@type": "MusicGroup", "name": "Ali Sethi & Shae Gill" },
+        "datePublished": "2022",
+        "genre": "Pakistani pop, Sufi fusion",
+        "url": "https://www.youtube.com/watch?v=5Eqb_-j3FDA",
+        "interactionStatistic": { "@type": "InteractionCounter", "interactionType": "https://schema.org/WatchAction", "userInteractionCount": 1013977456 }
+      },
+      {
+        "@type": "MusicRecording",
+        "name": "Afreen Afreen",
+        "byArtist": { "@type": "MusicGroup", "name": "Rahat Fateh Ali Khan & Momina Mustehsan" },
+        "datePublished": "2016",
+        "genre": "Qawwali, Ghazal",
+        "url": "https://www.youtube.com/watch?v=kw4tT7SCmaY",
+        "interactionStatistic": { "@type": "InteractionCounter", "interactionType": "https://schema.org/WatchAction", "userInteractionCount": 691197505 }
+      },
+      {
+        "@type": "MusicRecording",
+        "name": "Tajdar-e-Haram",
+        "byArtist": { "@type": "Person", "name": "Atif Aslam" },
+        "datePublished": "2015",
+        "genre": "Qawwali",
+        "url": "https://www.youtube.com/watch?v=a18py61_F_w",
+        "interactionStatistic": { "@type": "InteractionCounter", "interactionType": "https://schema.org/WatchAction", "userInteractionCount": 664736181 }
+      },
+      {
+        "@type": "MusicRecording",
+        "name": "Chaap Tilak",
+        "byArtist": { "@type": "MusicGroup", "name": "Abida Parveen & Rahat Fateh Ali Khan" },
+        "datePublished": "2014",
+        "genre": "Sufi, Classical",
+        "url": "https://www.youtube.com/watch?v=7SDrjwtfKMk",
+        "interactionStatistic": { "@type": "InteractionCounter", "interactionType": "https://schema.org/WatchAction", "userInteractionCount": 68966501 }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+
+  <!-- Fonts: Bodoni Moda (display serif) + Archivo (UI, an editorial grotesque chosen to avoid the Inter default) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#anthems">Skip to content</a>
+
+  <!-- Film-grain + vignette overlay -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- Cosmic Golden Acoustic Dust Canvas -->
+  <canvas class="cosmic-dust" id="cosmicDust" aria-hidden="true"></canvas>
+
+  <!-- Custom cursor -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"><span class="cursor__label">Play</span></div>
+  </div>
+
+  <!-- Preloader -->
+  <div class="loader" id="loader">
+    <div class="loader__inner">
+      <img class="loader__logo" src="assets/img/8880c162e9c68202e7bbaee2cf9e9f95.jpg" alt="Coke Studio logo" />
+      <div class="loader__mark">Coke&nbsp;Studio</div>
+      <div class="loader__region">P A K I S T A N</div>
+      <div class="loader__bar"><span id="loaderFill"></span></div>
+      <div class="loader__count"><span id="loaderPct">0</span>%</div>
+    </div>
+  </div>
+
+  <!-- Progress + scroll hint -->
+  <div class="progress" aria-hidden="true"><span id="progressFill"></span></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top">
+      <span class="nav__coke">Coke</span><span class="nav__studio">Studio</span>
+    </a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#anthems" data-nav>Anthems</a>
+      <a href="#legacy" data-nav>Legacy</a>
+      <a href="#room" data-nav>Room</a>
+      <a href="#catalog" data-nav>Catalog</a>
+      <a href="#gallery" data-nav>Gallery</a>
+      <a href="#tribute" data-nav>Tribute</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+      <span class="nav__toggletext">Menu</span>
+      <span class="nav__toggleicon" aria-hidden="true"><i></i><i></i></span>
+    </button>
+    <div class="nav__since">Est. 2008</div>
+  </header>
+
+  <!-- Mobile menu overlay -->
+  <div class="navmenu" id="navMenu" aria-hidden="true">
+    <nav class="navmenu__links">
+      <a href="#anthems" data-nav data-menu>Anthems</a>
+      <a href="#legacy" data-nav data-menu>Legacy</a>
+      <a href="#room" data-nav data-menu>Room</a>
+      <a href="#catalog" data-nav data-menu>Catalog</a>
+      <a href="#gallery" data-nav data-menu>Gallery</a>
+      <a href="#tribute" data-nav data-menu>Tribute</a>
+    </nav>
+  </div>
+
+  <main id="top">
+    <!-- ===================== SCROLL-FILM HERO ===================== -->
+    <section class="film" id="film">
+      <!-- Pinned canvas that scrubs a cinematic frame-sequence as you scroll -->
+      <div class="film__pin" id="filmPin">
+        <canvas class="film__canvas" id="filmCanvas"></canvas>
+
+        <!-- Painted key art the film resolves into on the final scroll -->
+        <div class="film__keyart" id="filmKeyart" aria-hidden="true"></div>
+
+        <!-- Cinematic letterbox bars -->
+        <div class="film__bar film__bar--top" aria-hidden="true"></div>
+        <div class="film__bar film__bar--bottom" aria-hidden="true"></div>
+
+        <!-- Overlay chapters that cross-fade with the film -->
+        <div class="film__overlay">
+          <div class="film__chapter is-active" data-chapter="0">
+            <p class="film__eyebrow">Since 2008</p>
+            <h1 class="film__title">
+              <span class="line"><em>Coke</em> Studio</span>
+              <span class="line line--outline">Pakistan</span>
+            </h1>
+            <p class="film__sub">A tribute to the sound of a nation.</p>
+          </div>
+
+          <div class="film__chapter" data-chapter="1">
+            <p class="film__eyebrow">Chapter I · The Studio</p>
+            <h2 class="film__title film__title--sm">One microphone,<br/>one take,<br/><em>and everything left in it</em></h2>
+            <p class="film__sub">Recorded live, with no lip-sync and no autotune: musicians gathered around a single light.</p>
+          </div>
+
+          <div class="film__chapter" data-chapter="2">
+            <p class="film__eyebrow">Chapter II · The Voices</p>
+            <h2 class="film__title film__title--sm">Legends who<br/><em>became</em> legends</h2>
+            <p class="film__sub">Atif, Rahat, Abida, Ali Sethi, Momina and the ones who taught them. A stage that made a nation listen again.</p>
+          </div>
+
+          <div class="film__chapter" data-chapter="3">
+            <p class="film__eyebrow">Chapter III · The World</p>
+            <h2 class="film__title film__title--sm">A billion plays.<br/><em>One borderless</em> song.</h2>
+            <p class="film__sub">Pasoori travelled well past any border on the map, and it kept going.</p>
+          </div>
+        </div>
+
+        <div class="film__scroll" aria-hidden="true">
+          <span>Scroll</span>
+          <div class="film__scrollline"><i></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== STATS STRIP ===================== -->
+    <section class="stats" id="stats">
+      <div class="stats__grid" id="statsGrid"><!-- injected --></div>
+      <p class="stats__source">
+        View and subscriber counts verified against YouTube public analytics,
+        October 2026. Figures rise daily.
+      </p>
+    </section>
+
+    <!-- ===================== HALL OF FAME ===================== -->
+    <section class="anthems" id="anthems">
+      <div class="section-head">
+        <p class="kicker"><span class="kicker__dot"></span>01 · The Hall of Fame</p>
+        <h2 class="section-title">Anthems that<br/><em>broke the internet</em></h2>
+        <p class="section-lede">
+          Four performances that transcended television. Tap any card to watch the original studio
+          recording and see its live, verified view count.
+        </p>
+      </div>
+
+      <div class="anthems__list" id="anthemsList"><!-- injected --></div>
+    </section>
+
+    <!-- ===================== CINEMA BREAK: STUDIO ===================== -->
+    <section class="cinema-break" aria-hidden="true">
+      <div class="cinema-break__img" style="background-image:url('assets/img/studio-atmosphere.jpg')"></div>
+      <div class="cinema-break__scrim"></div>
+      <div class="cinema-break__text">
+        <span>One stage.</span>
+        <span>One microphone.</span>
+        <span>Everything left in it.</span>
+      </div>
+    </section>
+
+    <!-- ===================== MARQUEE ===================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marqueeTrack"></div>
+    </div>
+
+    <!-- ===================== LEGACY TIMELINE (horizontal scroll) ===================== -->
+    <section class="legacy" id="legacy">
+      <div class="legacy__pin" id="legacyPin">
+        <div class="section-head section-head--inside">
+          <p class="kicker"><span class="kicker__dot"></span>02 · The Legacy</p>
+          <h2 class="section-title">Keepers of the <em>sound</em></h2>
+        </div>
+        <div class="legacy__track" id="legacyTrack"><!-- injected --></div>
+        <div class="legacy__progress"><span id="legacyBar"></span></div>
+      </div>
+    </section>
+
+    <!-- ===================== ROOM STUDIES ===================== -->
+    <section class="room-studies" id="room">
+      <div class="section-head room-studies__head">
+        <p class="kicker"><span class="kicker__dot"></span>03 · The Room</p>
+        <h2 class="section-title">Before the song,<br/><em>there is listening.</em></h2>
+        <p class="section-lede">
+          A visual study of the space around a live take: the voice, the hands, and the room that lets both be heard.
+        </p>
+      </div>
+
+      <div class="room-studies__gallery">
+        <figure class="room-study room-study--voice">
+          <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1400&q=85" alt="Singer performing into a studio microphone under warm light" loading="lazy" decoding="async" />
+          <figcaption>
+            <span>01 / The voice</span>
+            <strong>Close enough to hear the breath.</strong>
+          </figcaption>
+        </figure>
+        <figure class="room-study room-study--hands">
+          <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1100&q=85" alt="Musician's hands moving across an instrument during a live performance" loading="lazy" decoding="async" />
+          <figcaption>
+            <span>02 / The hands</span>
+            <strong>Tradition has a tempo of its own.</strong>
+          </figcaption>
+        </figure>
+        <figure class="room-study room-study--room">
+          <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1400&q=85" alt="Warmly lit recording console in a music studio" loading="lazy" decoding="async" />
+          <figcaption>
+            <span>03 / The room</span>
+            <strong>Every great take leaves a trace.</strong>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="room-studies__credit">Interpretive imagery via Unsplash. These are atmosphere studies, not official Coke Studio stills.</p>
+    </section>
+
+    <!-- ===================== CINEMA BREAK: HARMONIUM ===================== -->
+    <section class="cinema-break cinema-break--short" aria-hidden="true">
+      <div class="cinema-break__img" style="background-image:url('assets/img/harmonium-closeup.jpg')"></div>
+      <div class="cinema-break__scrim cinema-break__scrim--heavy"></div>
+    </section>
+
+    <!-- ===================== CATALOG ===================== -->
+    <section class="catalog" id="catalog">
+      <div class="section-head">
+        <p class="kicker"><span class="kicker__dot"></span>04 · The Catalog</p>
+        <h2 class="section-title">More <em>immortals</em></h2>
+        <p class="section-lede">A living archive. Each title opens its authentic studio recording on YouTube.</p>
+      </div>
+      <!-- Featured poster artwork -->
+      <figure class="poster">
+        <div class="poster__frame" data-cursor="Zoom">
+          <img class="poster__img" src="assets/img/2d18c417ce522552a299fc2f81269b49.jpg"
+               alt="Sher-e-Qawaali, poster artwork honoring Nusrat Fateh Ali Khan"
+               loading="lazy" decoding="async" />
+        </div>
+        <figcaption class="poster__caption">
+          <p class="kicker"><span class="kicker__dot"></span>Featured artwork</p>
+          <h3 class="poster__title">Sher-e-Qawaali</h3>
+          <p class="poster__sub">“Tenu Akhiyaan Udeekdiyan” · after Nusrat Fateh Ali Khan</p>
+          <p class="poster__text">
+            Before <em>Afreen Afreen</em> paid homage to his era, before Rahat carried the
+            family voice onto the studio floor, there was the Sher-e-Qawaali himself.
+            The Lion of Qawwali casts the longest shadow over every season of Coke Studio:
+            a poster for the king whose note built the house.
+          </p>
+        </figcaption>
+      </figure>
+
+      <!-- Catalog Filter Controls -->
+      <div class="catalog__filters" id="catalogFilters" role="tablist" aria-label="Filter catalog by era">
+        <button class="catalog__filter is-active" data-filter="all" role="tab" aria-selected="true">All Eras</button>
+        <button class="catalog__filter" data-filter="rohail" role="tab" aria-selected="false">Rohail Hyatt Era</button>
+        <button class="catalog__filter" data-filter="strings" role="tab" aria-selected="false">Strings Era</button>
+        <button class="catalog__filter" data-filter="xulfi" role="tab" aria-selected="false">Xulfi Global Era</button>
+        <button class="catalog__filter" data-filter="reinvention" role="tab" aria-selected="false">Reinvention</button>
+        <label class="catalog__search">
+          <span>Find a performance</span>
+          <input id="catalogSearch" type="search" placeholder="Title or artist" autocomplete="off" />
+        </label>
+      </div>
+
+      <div class="catalog__grid" id="catalogGrid"><!-- injected --></div>
+    </section>
+
+    <!-- ===================== GALLERY: VISUAL ARCHIVE ===================== -->
+    <section class="gallery" id="gallery">
+      <div class="section-head">
+        <p class="kicker"><span class="kicker__dot"></span>05 · Studio Archive</p>
+        <h2 class="section-title">The craft in <em>stills</em></h2>
+        <p class="section-lede">
+          Beyond the broadcast: the tangible heritage of live take audio, regional artisans, and handcrafted instruments that define the Coke Studio sound.
+        </p>
+      </div>
+
+      <div class="gallery__grid">
+        <article class="gallery__item gallery__item--wide gallery__item--captioned" data-cursor="Expand">
+          <div class="gallery__media">
+            <img src="assets/img/sarangi-rubab.jpg" alt="Master musicians playing Rubab and Sarangi silk strings" loading="lazy" decoding="async" />
+            <div class="gallery__overlay">
+              <span class="gallery__tag">Eastern Strings</span>
+              <h3 class="gallery__title">The Rubab &amp; Sarangi Duet</h3>
+              <p class="gallery__desc">Centuries of northern folk traditions captured through a solitary ribbon microphone.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery__item" data-cursor="Expand">
+          <div class="gallery__media">
+            <img src="assets/img/tabla-closeup.jpg" alt="Hands striking tabla drum skin with visible acoustic vibration" loading="lazy" decoding="async" />
+            <div class="gallery__overlay">
+              <span class="gallery__tag">Rhythm Section</span>
+              <h3 class="gallery__title">Tabla Vibrations</h3>
+              <p class="gallery__desc">The heart of classical ragas, tuned precisely to the singer's root tonic.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery__item" data-cursor="Expand">
+          <div class="gallery__media">
+            <img src="assets/img/dholak-percussion.jpg" alt="Dholak percussionist performing with lacquer wood drum" loading="lazy" decoding="async" />
+            <div class="gallery__overlay">
+              <span class="gallery__tag">Qawwali Pulse</span>
+              <h3 class="gallery__title">The Rhythmic Dholak</h3>
+              <p class="gallery__desc">Driving the spiritual crescendo of ecstatic Sufi gatherings.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery__item gallery__item--wide" data-cursor="Expand">
+          <div class="gallery__media">
+            <img src="assets/img/studio-console.jpg" alt="Vintage analog mixing console illuminated with warm VU meters" loading="lazy" decoding="async" />
+            <div class="gallery__overlay">
+              <span class="gallery__tag">Analog Warmth</span>
+              <h3 class="gallery__title">The Master Console</h3>
+              <p class="gallery__desc">Tube preamps and vintage EQ shaping raw acoustic spirit into history.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ===================== CINEMA BREAK: SOUNDWAVE ===================== -->
+    <section class="cinema-break cinema-break--tall" aria-hidden="true">
+      <div class="cinema-break__img" style="background-image:url('assets/img/soundwave-abstract.jpg')"></div>
+      <div class="cinema-break__scrim"></div>
+      <div class="cinema-break__text cinema-break__text--center">
+        <span>Since 2008, the sound endures.</span>
+      </div>
+    </section>
+
+    <!-- ===================== TRIBUTE / FOOTER ===================== -->
+    <footer class="tribute" id="tribute">
+      <div class="tribute__inner">
+        <p class="kicker kicker--center"><span class="kicker__dot"></span>06 · In Tribute</p>
+        <img class="tribute__seal" src="assets/img/8880c162e9c68202e7bbaee2cf9e9f95.jpg" alt="" aria-hidden="true" />
+        <h2 class="tribute__quote">
+          "If India has the Taj&nbsp;Mahal, Pakistan has <em>Coke Studio</em>."
+        </h2>
+        <p class="tribute__attr">Bhaskar Kashyap, The Express Tribune, July 2010</p>
+
+        <div class="tribute__coke">
+          <span class="tribute__word">Coke</span><span class="tribute__word tribute__word--studio">Studio</span>
+        </div>
+        <p class="tribute__tag">Pakistan · 2008 to <span id="yearNow"></span></p>
+
+        <a class="tribute__cta" href="https://www.youtube.com/@CokeStudioPakistan" target="_blank" rel="noopener" data-cursor="Visit">
+          <span>Visit the official channel</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <p class="tribute__credit">Tribute site made by <strong>Ahmed Ali Ghori</strong>.</p>
+        <p class="tribute__disclaimer" id="disclaimer"></p>
+        <p class="tribute__sources">
+          Sources: Wikipedia (seasons, episodes, producers) · YouTube &amp; socialcounts.org (views, subscribers), October 2026.
+        </p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ===================== VIDEO MODAL ===================== -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__scrim" data-close></div>
+    <div class="modal__frame">
+      <button class="modal__close" data-close aria-label="Close video">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal__player" id="modalPlayer">
+        <div class="modal__state" id="modalState">
+          <div class="modal__spinner" aria-hidden="true"></div>
+          <p class="modal__statetext" id="modalStateText">Loading the studio take…</p>
+          <a class="modal__fallback" id="modalFallback" href="#" target="_blank" rel="noopener" hidden>
+            Video could not load. Watch it directly on YouTube.
+          </a>
+        </div>
+        <!-- iframe injected -->
+      </div>
+      <div class="modal__meta">
+        <h3 id="modalTitle"></h3>
+        <p id="modalArtists"></p>
+        <div class="modal__tags" id="modalTags"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== AMBIENT SOUNDSCAPE & SPECTRUM WIDGET ===================== -->
+  <aside class="soundscape" id="soundscapeWidget" aria-label="Studio Soundscape Generator">
+    <button class="soundscape__toggle" id="soundscapeToggle" aria-label="Toggle generative studio soundscape" aria-pressed="false">
+      <span class="soundscape__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+      <span class="soundscape__text">
+        <span class="soundscape__label">Studio Soundscape</span>
+        <span class="soundscape__state" id="soundscapeState">Muted (Offline)</span>
+      </span>
+      <div class="soundscape__spectrum" id="soundscapeSpectrum" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </button>
+  </aside>
+
+  <!-- ===================== GALLERY LIGHTBOX MODAL ===================== -->
+  <div class="lightbox" id="lightboxModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visual Archive Inspection">
+    <div class="lightbox__scrim" data-lightbox-close></div>
+    <div class="lightbox__frame">
+      <button class="lightbox__close" data-lightbox-close aria-label="Close visual inspection">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="lightbox__media">
+        <img id="lightboxImg" src="" alt="" />
+      </div>
+      <div class="lightbox__caption">
+        <span class="gallery__tag" id="lightboxTag">Archive Still</span>
+        <h3 class="lightbox__title" id="lightboxTitle"></h3>
+        <p class="lightbox__desc" id="lightboxDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== STUDIO KEYBOARD SHORTCUTS MODAL ===================== -->
+  <div class="hotkeys-modal" id="hotkeysModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Keyboard Shortcuts">
+    <div class="hotkeys-modal__scrim" data-hotkeys-close></div>
+    <div class="hotkeys-modal__content">
+      <div class="hotkeys-modal__header">
+        <h3 class="hotkeys-modal__title">Studio Controls <em>· Hotkeys</em></h3>
+        <button class="hotkeys-modal__close" data-hotkeys-close aria-label="Close shortcuts">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="hotkeys-modal__list">
+        <div class="hotkey-row"><kbd>Space</kbd><span>Play / Close Featured Anthem</span></div>
+        <div class="hotkey-row"><kbd>M</kbd><span>Toggle Generative Sufi Soundscape</span></div>
+        <div class="hotkey-row"><kbd>G</kbd><span>Scroll directly to Visual Gallery</span></div>
+        <div class="hotkey-row"><kbd>A</kbd><span>Scroll to Hall of Fame Anthems</span></div>
+        <div class="hotkey-row"><kbd>Esc</kbd><span>Dismiss any Active Modal or Drawer</span></div>
+        <div class="hotkey-row"><kbd>?</kbd><span>Toggle this Keyboard Help Dialog</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libraries: GSAP + ScrollTrigger + Lenis (smooth scroll) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- App -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+
+</body>
+</html>

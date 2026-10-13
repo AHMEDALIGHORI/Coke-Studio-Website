@@ -1,0 +1,15 @@
+node_modules/
+.cline/
+.kombai/
+.playwright-cli/
+*.log
+*.err.log
+/*.png
+/.serve.js
+/serve.js
+/check.mjs
+/check1.txt
+/test.js
+/_test.js
+/_validate.js
+/_visual_test.js

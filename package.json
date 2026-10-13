@@ -1,0 +1,21 @@
+{
+  "name": "coke-studio-pakistan-tribute",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An independent, non-commercial tribute to Coke Studio Pakistan — the sound of a nation since 2008.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "coke-studio",
+    "pakistan",
+    "tribute",
+    "gsap",
+    "scroll-animation"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/cli": "^0.1.22"
+  }
+}
